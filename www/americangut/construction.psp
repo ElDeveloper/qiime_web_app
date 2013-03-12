@@ -1,16 +1,64 @@
-<%@ include file="header.psp" %>
+<%
+# Check to make sure session is valid. If not, redirect to login
+sess = Session.Session(req)
+sess['portal_type'] = 'americangut'
+sess.save()
+%>
 
-<br>
-<div class="left menuwrapper">
-	<ul class="menu">
-		<!-- <li><a href=""><img class="icon" src="/qiime/img/mail_icon.png">Notify me when the site is live!</a></li>-->
-        <li><a href="http://www.indiegogo.com/projects/american-gut"><img class="icon" src="/qiime/img/purchase_icon.png">Purchase a Kit</a></li>
-        <li><a href="http://americangut.org"><img class="icon" src="/qiime/img/what_icon.png">What is American Gut</a></li>
-	</ul>
-</div>
-<div id="content" class="right content">
-<img src="img/ag_construction.png">
-<br>
-<p class="construction_text">The participant login page for the American Gut Project is currently under construction while we test to ensure your anonymity and privacy.</p> <p class="construction_text"> We will notify all participants when the site is live.</p>
-</div>
-<%@ include file="footer.psp" %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>American Gut Project</title>
+        <link rel="stylesheet" type="text/css" href="style/americangut.css">
+    </head>
+    <body>
+		<div class="wrapper clearfix">
+	        <div class="header clearfix">
+	            <img id="logo" src="img/ag_logo.jpg">
+			</div>
+
+			<br>
+			<div class="left menuwrapper">
+				<ul class="menu">
+			        <li><a href="http://www.indiegogo.com/projects/american-gut"><img class="icon" src="/qiime/img/purchase_icon.png">Join the Project!</a></li>
+			        <li><a href="http://americangut.org"><img class="icon" src="/qiime/img/what_icon.png">What is American Gut</a></li>
+				</ul>
+				<!-- SAMPLE LOCATIONS -->
+				<div style="height:150px; width:90%; margin:10px;">
+<%
+form['zoom_level'] = 1
+form['center_lat'] = 48.14697
+form['center_long'] = -103.61797
+form['tiny_markers'] = True
+%>
+					<%@ include file="../visualize_all_sample_locations.psp"%>
+				</div>
+
+			</div>			
+
+			<div id="content" class="content">
+				<img src="img/ag_construction.png">
+                <p class="construction_text">Welcome – you have reached the participant login page for the American Gut Project. Thanks again for joining the study – we appreciate your support. This is our first citizen science project so we are still working out some kinks. A few things:</p>
+                <ol class="construction">
+                <li>
+                We are making final changes and additions to the online consent form you will sign and the questionnaire you will be asked to fill out. Meg is working double-time to get this done, as are a lot of other people in our lab at Univ of CO. So please come back to this page in a few days.
+                </li>
+                <li>
+                When the site is live, you will be able to log in and sign the consent form. Please, do not take your sample and mail back to us before you sign the online consent form. If you have any questions e-mail <a href="mailto:info@americangut.org">us</a>.
+                </li>
+                <li>
+                Since we will be asking you for a week’s worth of dietary info in the questionnaire, it would be great if you could get a head start on that now. Note we ask that you take your sample AFTER you have recorded your dietary info for a week. There are a number of FREE online dietary tools out there – we recommend Calorie Counter. Note we will be asking questions about your carb, protein, fat, alcohol, and fiber intake, as well as some info on types of food. So, use a tool that allows you to enter as much detail as possible.
+                </li>
+                </ol>
+                <p class="construction_text">
+                Again, we appreciate your patience. Everyone is working hard on our end to make this project as interesting as possible for everyone. If you have any questions, please email us at info@americangut.org
+                </p>
+			</div>
+
+			
+
+		</div>
+
+	</body>
+</html>

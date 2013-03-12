@@ -78,12 +78,66 @@ class AGDataAccess(object):
         con.cursor().callproc('ag_authenticate_user', [username, password, user_data])
         row = user_data.fetchone()
         if row:
-            user_data = {'web_app_user_id':row[0], 'email':row[1], 'name':row[2], \
+            user_data = {'web_app_user_id':str(row[0]), 'email':row[1], 'name':row[2], \
                 'address':row[3], 'city':row[4], 'state':row[5], 'zip':row[6], \
                 'country':row[7]}
             return user_data
         else:
             return False
 
-    
+    def addAGHumanParticipant(self, ag_login_id, participant_name):
+        con = self.getMetadataDatabaseConnection()
+        con.cursor().callproc('ag_add_participant', [ag_login_id, participant_name])
+
+    def addAGSingle(self, ag_login_id, participant_name, field_name, field_value, table_name):
+        con = self.getMetadataDatabaseConnection()
+        sql = "update {0} set {1} = '{2}' where ag_login_id = '{3}' and participant_name = '{4}'".format(table_name, \
+            field_name, field_value, ag_login_id, participant_name)
+        con.cursor().execute(sql)
+        con.cursor().execute('commit')
+
+    def deleteAGParticipant(self, ag_login_id, participant_name, table_name):
+        con = self.getMetadataDatabaseConnection()
+        sql = "delete {0} where ag_login_id = '{1}' and participant_name = '{2}'".format(table_name, ag_login_id, participant_name)
+        con.cursor().execute(sql)
+        con.cursor().execute('commit')
+
+    def insertAGMultiple(self, ag_login_id, participant_name, field_name, field_value):
+        con = self.getMetadataDatabaseConnection()
+        sql = "insert into ag_survey_multiples (ag_login_id, participant_name, item_name, item_value) values ('{0}', \
+            '{1}', '{2}', '{3}')".format(ag_login_id, participant_name, field_name, field_value)
+        con.cursor().execute(sql)
+        con.cursor().execute('commit')
+
+    def deleteAGMultiple(self, ag_login_id, participant_name):
+        con = self.getMetadataDatabaseConnection()
+        sql = "delete ag_survey_multiples where ag_login_id = '{0}' and participant_name = '{1}'".format(ag_login_id, participant_name)
+        con.cursor().execute(sql)
+        con.cursor().execute('commit')
+
+    def removeAGHumanParticipant(self, ag_login_id, participant_name):
+        # Clear the general values data
+        self.deleteAGGeneralValues(ag_login_id, participant_name)
+
+        # Clear the multiple values table
+        self.deleteAGMultiple(ag_login_id, participant_name)
+
+        # Clear the participant row
+        self.deleteAGParticipant(ag_login_id, participant_name, 'ag_human_survey')
+
+    def addAGGeneralValue(self, ag_login_id, participant_name, field_name, field_value):
+        con = self.getMetadataDatabaseConnection()
+        sql = "insert into ag_survey_answer (ag_login_id, participant_name, question, answer) values ('{0}', '{1}', \
+            '{2}', '{3}')".format(ag_login_id, participant_name, field_name, field_value)
+        con.cursor().execute(sql)
+        con.cursor().execute('commit')
+
+    def deleteAGGeneralValues(self, ag_login_id, participant_name):
+        con = self.getMetadataDatabaseConnection()
+        sql = "delete ag_survey_answer where ag_login_id = '{0}' and participant_name = '{1}'".format(ag_login_id, participant_name)
+        con.cursor().execute(sql)
+        con.cursor().execute('commit')
+
+
+
     

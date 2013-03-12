@@ -1,0 +1,53 @@
+<tr><td><h4>Female Questions</h4></td></tr>
+<tr>
+    <td>Do you currently use some form of hormonal birth control?</td>
+    <td>
+        <select id="contraceptive" name="contraceptive">
+            <option>Select an option</option>
+            <option>I take the "pill"</option>
+            <option>I use an injected contraceptive (DMPA)</option>
+            <option>I use a contraceptive patch (Ortho-Evra)</option>
+            <option>I use the NuvaRing</option>
+            <option>I use some other type of birth control</option>
+            <option>No</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Are you currently pregnant?</td>
+    <td>
+        <div id="pregnant">
+            <input type="radio" id="pregnant_yes" name="pregnant" onclick="javascript:setVisible('pregnant_option')"/><label for="pregnant_yes">Yes</label>
+            <input type="radio" id="pregnant_no" name="pregnant" onclick="javascript:setInvisible('pregnant_option')"/><label for="pregnant_no">No</label>
+            <input type="radio" id="pregnant_notsure" name="pregnant" onclick="javascript:setInvisible('pregnant_option')"/><label for="pregnant_notsure">Not sure</label>
+        </div>
+    </td>
+</tr>
+</table>
+<div id="pregnant_option" class="invisible">
+    <table id="survey" width="100%">
+    <colgroup>
+           <col span="1" style="width: 50%;">
+           <col span="1" style="width: 50%;">
+    </colgroup>
+        <tr>
+            <td>When is your due date?</td>
+            <td><input type="text" id="pregnant_due_date" name="pregnant_due_date" readonly="readonly" /></td>
+            <script>
+              $(function() {
+                $( "#pregnant_due_date" ).datepicker({
+                    maxDate: '+9m',
+                    changeMonth: true,
+                    changeYear: true
+                });
+              });
+            </script>                  
+        </tr>
+    </table>
+</div>
+
+<table id="survey" width="100%">
+<colgroup>
+       <col span="1" style="width: 50%;">
+       <col span="1" style="width: 50%;">
+</colgroup>

@@ -1,0 +1,45 @@
+<tr><td><h4>Diabetes Questions</h4></td></tr>
+<tr>
+    <td>Date of diabetes diagnosis</td>
+    <td><input type="text" id="diabetes_diagnose_date" name="diabetes_diagnose_date" /></td>
+    <script>
+      $(function() {
+        $( "#diabetes_diagnose_date" ).datepicker();
+      });
+    </script>
+                        
+</tr>
+<tr>
+    <td>Do you take medication to control your diabetes?</td>
+    <td>
+        <div id="diabetes_medication">
+            <input type="radio" id="diabetes_medication_yes" name="diabetes_medication" onclick="javascript:setVisible('diabetes_option')"/><label for="diabetes_medication_yes">Yes</label>
+            <input type="radio" id="diabetes_medication_no" name="diabetes_medication" onclick="javascript:setInvisible('diabetes_option')"/><label for="diabetes_medication_no">No</label>
+        </div>
+    </td>
+</tr>
+</table>
+<div id="diabetes_option" class="invisible">
+    <table id="survey" width="100%">
+    <colgroup>
+           <col span="1" style="width: 50%;">
+           <col span="1" style="width: 50%;">
+    </colgroup>
+        <tr>
+            <td>Which medication(s) do you take for your diabetes?</td>
+            <td>
+                <div id="diabetes_medications">
+                    <div id="diabetes_medications_1">
+                        <input type="text" name="diabetes_medications_1" />
+                    </div>
+                </div>
+                <a class="add_field" href="javascript:addField(\'diabetes_medications\')" title="Add another medication">+</a>
+            </td>                        
+        </tr>
+    </table>
+</div>
+<table id="survey" width="100%">
+<colgroup>
+       <col span="1" style="width: 50%;">
+       <col span="1" style="width: 50%;">
+</colgroup>
