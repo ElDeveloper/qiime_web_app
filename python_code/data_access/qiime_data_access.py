@@ -2961,8 +2961,10 @@ class QiimeDataAccess(object):
             print 'Exception caught: %s.\nThe error is: %s' % (type(e), e)
             return False  
 
-
-
+    def toggleStudyStatus(self, input_values):
+        """ """
+        con = self.getMetadataDatabaseConnection()
+        con.cursor().callproc('')
     
     
     

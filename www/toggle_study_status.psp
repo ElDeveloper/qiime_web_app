@@ -1,0 +1,48 @@
+<%
+# File created on 13 Feb 2013
+
+__author__ = "Yoshiki Vazquez-Baeza"
+__copyright__ = "Copyright 2009-2010, QIIME Web Analysis"
+__credits__ = ["Yoshiki Vazquez-Baeza"]
+__license__ = "GPL"
+__version__ = "1.6.0-dev"
+__maintainer__ = "Yoshiki Vazquez-Baeza"
+__email__ = "yoshiki89@gmail.com"
+__status__ = "Development"
+
+from submit_toggle_study_status import submit_toggle_study_status_job
+
+# Gather necessary values to create a new queue job
+sess = Session.Session(req)
+study_id = int(sess['study_id'])
+user_id = int(sess['web_app_user_id'])
+study_status = str(form['study_status'])
+
+#req.write("<p>The cake is a lie :P</p>")
+
+# if study_status == 'public':
+# #    req.write("<p>The study is going to become PRIVATE %d</p>" % study_id)
+# elif study_status == 'private':
+#     req.write("<p>The study is going to become PUBLIC %d</p>" % study_id)
+
+try:
+    # submit the job
+    submit_toggle_study_status_job(user_id, study_id, study_status)
+    
+    # go back to the page that sent us here
+    psp.redirect('fusebox.psp?page=select_study_task.psp')
+except Exception, e:
+    req.write(str(e))
+
+# (X) ONCEEEE add that type to torque job type table in the sequences db 
+# make sure the handler is capable of unpacking the arguments
+
+##########################
+# (X)submit a new job type to the queue
+# (X)  create torque job submit_job_to_qiime as an example
+# (X)  define the parameters to be unpacked plus the script structure
+# update sample set "public" = 'y' where study_id = xxx
+#     * check qiime_data_access and make sure it doesn't already exists
+#     * if not, add a new qiime_data_access function, along with an associated
+#     * stored procedure.
+%>

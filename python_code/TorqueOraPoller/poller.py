@@ -19,7 +19,8 @@ from data_access_connections import data_access_factory
 
 __author__ = "Daniel McDonald"
 __copyright__ = "Copyright 2010, The QIIME project"
-__credits__ = ["Daniel McDonald", "Jesse Stombaugh", "Doug Wendel"]
+__credits__ = ["Daniel McDonald", "Jesse Stombaugh", "Doug Wendel",
+    "Yoshiki Vazquez-Baeza"]
 __license__ = "GPL"
 __version__ = "1.0-dev"
 __maintainer__ = "Daniel McDonald"
@@ -48,6 +49,7 @@ JOB_TYPE_LOOKUP = {'PollerTestHandlerOkay':PollerTestHandlerOkay,
                    #'makeMappingFileandPCoAPlots':makeMappingFileandPCoAPlots,
                    'ExportToMGRASTHandler':ExportToMGRASTHandler,
                    'ExportToEBISRAHandlerHandler':ExportToEBISRAHandler,
+                   'ToggleStudyStatusHandler':ToggleStudyStatusHandler,
                    'generateMapOTUTableSubmitJobs':generateMapOTUTableSubmitJobs,
                    'betaDiversityThroughPlots':betaDiversityThroughPlots,
                    'makeOTUHeatmap':makeOTUHeatmap,
@@ -209,7 +211,6 @@ class Poller(Daemon):
         output = getoutput(QSTAT_NORMAL % self.username)
         poll_result = self.parseQstat(output)
         completed_job_ids = []
-        job_notes = ''
         
         state_feedback = [(ej, 'ERROR_STARTING', "") for ej in err_jobs]
         for pbs_id, job in self.Jobs.items():
@@ -305,6 +306,10 @@ class Poller(Daemon):
             elif job_type=='generateMapOTUTableSubmitJobs':
                 submit_queue = 'no_bad_touching'
                 pvmem='64gb'
+                res = getoutput(QSUB_CMD % (cmd, job_name,pvmem,submit_queue))
+            elif job_type=='ToggleStudyStatusHandler'
+                submit_queue = 'no_bad_touching'
+                pvmem='4gb'
                 res = getoutput(QSUB_CMD % (cmd, job_name,pvmem,submit_queue))
             else:
                 submit_queue = 'no_bad_touching'

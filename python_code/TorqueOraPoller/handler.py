@@ -6,7 +6,8 @@ from copy import copy
 
 __author__ = "Daniel McDonald"
 __copyright__ = "Copyright 2010, The QIIME project"
-__credits__ = ["Daniel McDonald", "Jesse Stombaugh", "Doug Wendel"]
+__credits__ = ["Daniel McDonald", "Jesse Stombaugh", "Doug Wendel",
+    "Yoshiki Vazquez-Baeza"]
 __license__ = "GPL"
 __version__ = "1.0-dev"
 __maintainer__ = "Daniel McDonald"
@@ -23,6 +24,7 @@ QIIME_LOAD_ANALYSIS_OTU_TABLE = QIIME_WEBAPP_BASE + "/submit_analysis_and_otu_ta
 QIIME_LOAD_SPLIT_LIB_SEQS = QIIME_WEBAPP_BASE + "/submit_split_lib_seqs_to_db.py"
 QIIME_EXPORT_MGRAST = QIIME_WEBAPP_BASE + "/submit_metadata_to_mgrast.py"
 QIIME_EXPORT_EBISRA = QIIME_WEBAPP_BASE + "/submit_metadata_to_ebi_sra.py"
+QIIME_TOGGLE_STUDY_STATUS = QIIME_WEBAPP_BASE + "/toggle_study_status.py"
 QIIME_PICK_OTU = QIIME_WEBAPP_BASE + "/chain_pick_otus.py"
 #QIIME_SUBMIT_SFF_METADATA_TO_DB = QIIME_WEBAPP_BASE  + "/submit_sff_through_metadata_to_db.py"
 #QIIME_SUBMIT_OTU_MAPPING_TO_DB = QIIME_WEBAPP_BASE  + "/submit_otu_mapping_to_db.py"
@@ -277,6 +279,21 @@ class ExportToEBISRAHandler(JobHandler):
     """Handler for submit_metadata_to_mgrast.py"""
     _base_cmd = ' '.join([PYTHON_BIN, QIIME_EXPORT_EBISRA, "-s %(StudyID)s"])
     _base_args = {'StudyID':None}
+    _next_job_handler = ''
+
+    def checkJobOutput(self, stdout_lines, stderr_lines):
+        """If stderr_lines is not empty an error has occured"""
+        if len(stderr_lines):
+            self._notes = '\n'.join(stderr_lines)
+            return True
+        else:
+            return False
+
+# Switches the status of a study and files from public to private and viceversa
+class ToggleStudyStatusHandler(JobHandler):
+    """Handler for toggle_study_status.py"""
+    _base_cmd = ' '.join([PYTHON_BIN, QIIME_TOGGLE_STUDY_STATUS, "-s %(StudyID)s --study_status %(StudyStatus)s"])
+    _base_args = {'StudyID':None, 'StudyStatus':None}
     _next_job_handler = ''
 
     def checkJobOutput(self, stdout_lines, stderr_lines):
