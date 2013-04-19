@@ -364,20 +364,24 @@ if can_delete == 'y' or is_admin:
 # START if is_admin: indent
 # sample_details is a variable only defined when certain parameters exist
 # this has to be changed, this is a terrible way to check for this :O
-if is_admin and 'sample_details' in locals():
+# req.write('Are you an admin %d' % int(is_admin))
+if is_admin:
+    sample_details = data_access.getSampleDetailList(study_id)
+
     # sample_details contains a y/n column if the sample is public/private
     # all samples have to be public for the study to be considered public
     study_is_public = all([sample_detail_line[2] == 'y' for sample_detail_line
         in sample_details])
 
     # must also check for processing to be complete and seqs to be collated
+    # should verify that the torque_job has all of the jobs completed ok
     if sff_complete == 'y' and metadata_complete == 'y':
         if study_is_public:
             # missing proper format
             # what should I do with the target value
             # things that are changed in this req.write should also be changed
             # for the case when the study has not be completed but is public
-            req.write(\
+            req.write(
             '''
             <li>
                 <form id="toggle_study_status" action="toggle_study_status.psp" method="post">
@@ -402,22 +406,9 @@ if is_admin and 'sample_details' in locals():
             ''')
 
     else:
-        # there shouldn't be a reason why a study would be public whislt there
-        # metadata, seqs and processing is not correct/complete
-        if study_is_public:
-            req.write(\
-            '''
-            <li>
-                <form id="toggle_study_status" action="toggle_study_status.psp" method="post">
-                    <input type="hidden" name="page" id="page" value="toggle_study_status.psp">
-                    <input type="hidden" name="study_status" id="study_status" value="public">
-                    <a href="" onclick="document.forms['toggle_study_status'].submit(); return false;">
-                    Make study private</a>
-                </form>
-            </li>
-            ''')
-        else:
-            req.write('<li>Make study public (upload the sequences, metadata and process correctly)</li>')
+        req.write('<li>Cannot toggle study status until the sequences and '
+            'metadata are uploaded and the study has been processed correctly'
+            '</li>')
 
 
 # (X) TorqueOraPoller handler.py and poller.py, I should also add a new type of job
