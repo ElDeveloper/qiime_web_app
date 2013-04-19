@@ -5,6 +5,7 @@
 <tr>
 <td width="20%"></td>
 <td>
+<h3>If you need help with the website, please use the contact mechanism in the menu to the left. Please do not email the people listed in this form for help, unless it has to do with an injury. </h3>
                     <div class="scroll lefta">
                         
                         <h4><div class="red left">MAIN</div>&nbsp;CONSENT TO PARTICIPATE IN A RESEARCH STUDY</h4>
@@ -16,7 +17,7 @@ Key Personnel:
     <tr><td>Rob Knight</td><td>Principal Investigator</td><td>Biofrontiers Institute/HHMI</td><td>303-492-1984</td><td>Rob.Knight@colorado.edu</td></tr>
     <tr><td>Gail Ackermann</td><td>Co-I</td><td>Biofrontiers Institute</td><td>303-492-7506</td><td>Gail.Ackermann@colorado.edu</td></tr>
     <tr><td>Noah Fierer</td><td>Co-I</td><td>CIRES</td><td>303-492-5615</td><td>Noah.Fierer@Colorado.edu</td></tr>
-    <tr><td>Matthew Gebert</td><td>Research Assistant</td><td>Biofrontiers Institute</td><td>303-492-6725</td><td>Matthew.Gebert@colorado.edu</td></tr>
+    <tr><td>Gregory Humphrey</td><td>Research Assistant</td><td>Biofrontiers Institute</td><td>303-492-6725</td><td>Gregory.Humphrey@colorado.edu</td></tr>
     <tr><td>Donna Berg-Lyons</td><td>Research Assistant</td><td>Biofrontiers Institute</td><td>303-492-6725</td><td>Donna.Lyons@colorado.edu</td></tr>
     <tr><td>Antonio González Peña</td><td>Post-Doctoral Research Assistant</td><td>Biofrontiers Institute</td><td>303-492-6725</td><td>Antonio.Pena@colorado.edu</td></tr>
 </table>
@@ -27,11 +28,11 @@ Key Personnel:
     <li><h4>Purpose and Background</h4>
         <p> Trillions of microorganisms live on and within the human body, which is colonized at birth and continuously inhabited throughout a person’s lifetime. Our resident microbes occupy many body habitats, including the skin and mucosal surfaces, and the gastrointestinal tract. Our microbial symbionts are largely harmless or beneficial; for example, we rely on our gut microbiota to aid in nutrition, resist pathogens, and educate our immune system.  We would like to survey a large number of volunteers from the US and other countries including all body types, all dietary preferences and both healthy and unhealthy people to more clearly define the range of these microbial communities.  We are interested in learning whether people with similar age, diet, environment, family, pets, body weight, or other features, also have similar microorganisms.</p><p>
 To accomplish this we will ask you to sample up to 5 sites on your body (skin – including left and right palms and forehead, saliva and stool) using polyester tipped swabs that will be sent to you at the address you provide with instructions on how to obtain the samples, instructions for safely returning the samples to us and a pre-addressed envelope for returning the samples to us through FedEx or the mail service. You will also be asked to complete the questionnaire online that includes questions about age, diet, environment, family, pets, body weight and current health status.  You will be asked to use a website to determine your average intake of fat, protein, carbohydrates, vegetables and grains.  The samples will have a code label attached to them so that we can identify who sent them to us but no personally identifying information. Some people will be asked to keep a food diary detailing everything they eat and drink every day for up to 6 months.  We may also request additional skin, saliva and stool samples from certain participants that are of particular interest because of their health status and/or dietary preferences (a maximum of 7 times).  We anticipate that the entire study will be completed in 5 years. When the results are available for your samples we will provide you with an easy to understand summary of the microbial communities of your body and a summary of the combined results of other participants for comparison.  We anticipate that the results for your samples will be available within 3-6 months of receipt in the laboratory. These results will be sent to you by email. </p><p>
-We are requesting that you contribute funding to the project at a level that is commensurate with the number of swabs and the kings of tests you are requesting.  The basic package covers a single fecal swab.
+We are requesting that you contribute funding to the project at a level that is commensurate with the number of swabs and the kinds of tests you are requesting.  The basic package covers a single fecal swab.
         </p>
     </li>
     <li><h4>Study Tasks and Procedures</h4>
-        <p>If you agree to participate in this study you will be asked to donate samples ,to complete a questionnaire and to provide updated personal information. We will send you a sample kit that includes the swabs (which are individually wrapped in plastic and include a plastic sleeve for returning the sample to us), coded labels for the sample tubes, the questionnaire and a prepaid FedEx envelope to return the samples to us for analysis.  
+        <p>If you agree to participate in this study you will be asked to donate samples ,to complete a questionnaire and to provide updated personal information. We will send you a sample kit that includes the swabs (which are individually wrapped in plastic and include a plastic sleeve for returning the sample to us), coded labels for the sample tubes, and a pre-addressed envelope to return the samples to us for analysis.  
 <p>Samples will include :  
 <ol>
 <li>Stool (fecal) by collecting a smear from used bathroom tissue using a sterile polyester-tip swab</li>
@@ -95,11 +96,11 @@ To withdraw from the study send email to the <a href="mailto:info@americangut.or
     <li><h4>Contacts and Questions</h4>
         <table>
             <tr>
-                <td>For questions, concerns, or complaints about this study, call please call Rob Knight at 303-492-1984 or 
+                <td>For questions, concerns, or complaints about this study, please call Rob Knight at 303-492-1984 or 
                 email <a href="mailto:Rob.Knight@colorado.edu">Rob Knight</a>.</td>
             </tr>
             <tr>
-            <td>If you are injured as a result of participating in this study or for questions about a study-related injury, call Please call Rob Knight at 303-492-1984 or email <a href="mailto:Rob.Knight@colorado.edu">Rob Knight</a></td>
+            <td>If you are injured as a result of participating in this study or for questions about a study-related injury, please call Rob Knight at 303-492-1984 or email <a href="mailto:Rob.Knight@colorado.edu">Rob Knight</a></td>
             </tr>
             <tr>
                 <td>If you have questions about your rights as a research study participant, you can call the Institutional Review Board (IRB). 
@@ -121,27 +122,34 @@ To withdraw from the study send email to the <a href="mailto:info@americangut.or
 <div class="lefta">
         <div class="" id="consent">
         <form method="post" id="consent_info" name="consent_info" action="fusebox.psp">
-            <input type="checkbox" name="consent" id="consent"> I have read (or someone has read to me) this form. I am aware that I am being 
+            <input tabindex="1" value="Yes" type="checkbox" name="consent" id="consent"> I have read (or someone has read to me) this form. I am aware that I am being 
             asked to provide personally identifying information so that I can be considered for inclusion into the study. I voluntarily agree 
             to provide this information. I am not giving up any legal rights by signing this form. I will be sent a copy of this form by e-mail.
         </div>
         <br>
         <br>
         <table>
-            <tr><td>Name of participant</td><td><input type="text" name="participant_name" id="participant_name"><div class="red right">*</div></td></tr>
-            <tr><td>Participant is 7 to 13 years old</td><td><input type="checkbox" name="is_7_to_13" id="is_7_to_13" class="is_7_to_13"></td></tr>
-            <tr><td>Name of parent/guardian 1</td><td><input type="text" name="parent_1_name" id="parent_1_name"></td></tr>
-            <tr><td>Name of parent/guardian 2</td><td><input type="text" name="parent_2_name" id="parent_2_name"></td></tr>
-            <tr><td>One or both parents are deceased or unable to consent.</td><td><input type="checkbox" name="deceased_parent" id="deceased_parent"></td></tr>
+            <tr><td>Name of participant</td><td><input tabindex="2" type="text" name="participant_name" id="participant_name" onkeypress='validateText(event)'><div class="red right">*</div></td></tr>
+            <tr><td>Email of participant</td><td><input tabindex="3" type="text" name="participant_email" id="participant_email"  onkeypress='validateText(event)'><div class="red right">*</div></td></tr>
+            <tr><td>Participant is 7 to 13 years old</td><td><input type="checkbox" name="is_7_to_13" id="is_7_to_13" class="is_7_to_13" onclick="toggleConsent()"></td></tr>
+            <tr><td>Name of parent/guardian 1</td><td><input tabindex="4" type="text" name="parent_1_name" id="parent_1_name" onkeypress='validateText(event)'></td></tr>
+            <tr><td>Name of parent/guardian 2</td><td><input tabindex="5" type="text" name="parent_2_name" id="parent_2_name" onkeypress='validateText(event)'></td></tr>
+            <tr><td>One or both parents are deceased or unable to consent.</td><td><input  tabindex="6" type="checkbox" name="deceased_parent" id="deceased_parent" value="yes"></td></tr>
         </table>
 </div>
-
+<script>
+    $(function() {
+        document.getElementById("parent_1_name").disabled = true
+        document.getElementById("parent_2_name").disabled = true
+        document.getElementById("deceased_parent").disabled = true
+    });
+</script>
 </td>
 <td width="20%"></td>
 </tr>
 <tr>
 <td></td>
-<td><input type="button" value="Continue" id="submit_form" onclick="validateConsent()"></td>
+<td><input tabindex="7" type="button" value="Continue" id="submit_form" onclick="validateConsent()"></td>
 <td></td>
 </tr>
 </table>

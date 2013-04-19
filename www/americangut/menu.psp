@@ -7,44 +7,160 @@ _version_ = "1.0.0.dev"
 _maintainer_ = ["Meg Pirrung"]
 _email_ = "meganap@gmail.com <mailto:meganap@gmail.com>"
 _status_ = "Development"
-
-from enums import ServerConfig
-from data_access_connections import data_access_factory
-
 %>
 
 <div class="left menuwrapper">
-	<ul class="menu">
-		<li><a href="fusebox.psp?page=portal.psp"><img class="icon" src="/qiime/img/login_icon.png">Home</a></li>
+    <ul class="menu">
+        <li><a href="fusebox.psp?page=portal.psp"><img class="icon" src="/qiime/img/login_icon.png">Home</a></li>
         <div class="menu_separator"></div>
-        <li><img class="icon" src="/qiime/img/participants_icon.png">Participants
+        <li><img class="icon" src="/qiime/img/participants_icon.png">Participants</li>
             <ul class="menu">
 
 <%
-LIST_ITEM = '<li><img class="icon" src="/qiime/img/participant_icon.png">%s</li>'
-ag_data_access = data_access_factory(ServerConfig.data_access_type,
-                                     class_type = 'american_gut')
-
 ag_login_id = sess['user_data']['web_app_user_id']
-
-query = ("select participant_name from ag_human_survey "
-         "where ag_login_id = '%s'" % ag_login_id)
-
+query = ("select participant_name from ag_human_survey where ag_login_id = '%s'" % ag_login_id)
 participants = ag_data_access.dynamicMetadataSelect(query)
+available_barcodes = ag_data_access.getAvailableBarcodes(ag_login_id)
 
 for p in participants:
     # database results come back as a list of tuples, even if it is a 1-member
     # tuple (like this one). So we need to take the first element of this
     # 1-member tuple
     p = p[0]
-    req.write(LIST_ITEM % p)
-# END FOR
+    
+    participant_menu_item = \
+    """
+    <form action="fusebox.psp" method="post" id="participant_overview_{0}">
+        <li>
+            <input type="hidden" name="page" value="participant_overview.psp"/>
+            <input type="hidden" name="participant_name" value="{0}"/>
+            <img class="icon" src="/qiime/img/participant_icon.png"/>
+            <a href="" onclick="document.forms['participant_overview_{0}'].submit(); return false;">{0}</a>
+        </li>
+    </form>
+    """.format(p)
+
+    add_sample_menu_item = \
+    """
+    <form action="fusebox.psp" method="post" id="add_sample_{0}">
+        <li>
+            <input type="hidden" name="page" value="add_sample.psp"/>
+            <input type="hidden" name="sample_type" value="human"/>
+            <input type="hidden" name="participant_name" value="{0}"/>
+            <img class="icon" src="/qiime/img/add_sample_icon.png"/>
+            <a href="" onclick="document.forms['add_sample_{0}'].submit(); return false;">Add Sample</a>
+        </li>
+    </form>
+    """.format(p)
+
+    add_animal_sample_menu_item = \
+    """
+    <form action="fusebox.psp" method="post" id="add_sample_animal">
+        <li>
+            <input type="hidden" name="page" value="add_sample.psp"/>
+            <input type="hidden" name="sample_type" value="animal"/>
+            <img class="icon" src="/qiime/img/add_sample_icon.png"/>
+            <a href="" onclick="document.forms['add_sample_animal'].submit(); return false;">Add Animal Sample</a>
+        </li>
+    </form>
+    """.format(p)
+
+    # Write out the participant menu item
+    req.write(participant_menu_item)
+
+    # Start the list for the sample menu items
+    req.write('<ul class="menu">\n')
+
+    # Get the barcodes which have actually been filled out. They will all exist but only
+    # returns those that have some additional data associated with them
+    barcodes = ag_data_access.getParticipantSamples(ag_login_id, p)
+    for barcode in barcodes:
+        sample_menu_item = \
+        """
+        <form action="fusebox.psp" method="post" id="sample_overview_{0}">
+            <li>
+                <input type="hidden" name="page" value="sample_overview.psp"/>
+                <input type="hidden" name="barcode" value="{0}"/>
+                <img class="icon" src="/qiime/img/sample_icon.png"/>
+                <a href="" onclick="document.forms['sample_overview_{0}'].submit(); return false;">{0}</a>
+            </li>
+        </form>
+        """.format(barcode['barcode'])
+
+        req.write(sample_menu_item)
+    # End for
+    
+    # Figure out if all samples have been used. Only draw Add Sample if there's an unused barcode.
+    if len(available_barcodes) > 0:
+        req.write(add_sample_menu_item)
+    req.write('</ul>\n\n')
+
+# End for
 %>
-                <li><a href="fusebox.psp?page=new_participant.psp"><img class="icon" src="/qiime/img/add_participant_icon.png">Add Participant</a></li>
+                
+                <li><a href="fusebox.psp?page=new_participant_overview.psp"><img class="icon" src="/qiime/img/add_participant_icon.png">Add Participant</a></li>
             </ul>
+
+
+
+
+
+
+            <li><img class="icon" src="/qiime/img/non_human_icon.png">Non-Human Samples</li>
+                <ul class="menu">
+                    <li><img class="icon" src="/qiime/img/environmental_overview_icon.png"/>Environmental</li>
+                    <ul class="menu">
+
+<%
+barcodes = ag_data_access.getEnvironmentalSamples(ag_login_id)
+for barcode in barcodes:
+    sample_menu_item = \
+    """
+    <form action="fusebox.psp" method="post" id="sample_overview_{0}">
+        <li>
+            <input type="hidden" name="page" value="sample_overview.psp"/>
+            <input type="hidden" name="barcode" value="{0}"/>
+            <img class="icon" src="/qiime/img/sample_icon.png"/>
+            <a href="" onclick="document.forms['sample_overview_{0}'].submit(); return false;">{0}</a>
+        </li>
+    </form>
+    """.format(barcode['barcode'])
+
+    req.write(sample_menu_item)
+
+# End for
+%>
+
+<%
+add_general_sample_menu_item = \
+"""
+<form action="fusebox.psp" method="post" id="add_sample_general">
+    <li>
+        <input type="hidden" name="page" value="add_sample.psp"/>
+        <input type="hidden" name="sample_type" value="general"/>
+        <img class="icon" src="/qiime/img/environmental_icon.png"/>
+        <a href="" onclick="document.forms['add_sample_general'].submit(); return false;">Add Sample</a>
+    </li>
+</form>
+"""
+
+if len(available_barcodes) > 0:
+    # Indent
+%>            
+                <%=add_general_sample_menu_item%>
+<%
+# End if
+%>
+                    </ul>
+            </ul>
+
         </li>
         <div class="menu_separator"></div>
-        <li><a href=""><img class="icon" src="/qiime/img/purchase_icon.png">Join the project!</a></li>
-        <li><a href="http://americangut.org"><img class="icon" src="/qiime/img/what_icon.png">What is American Gut</a></li>
-	</ul>
+        <li><a href="FAQ.psp" target="_blank"><img class="icon" src="/qiime/img/what_icon.png">FAQ</a></li>
+        <li><a href="fusebox.psp?page=help_request.psp"><img class="icon" src="/qiime/img/mail_icon.png">Contact us</a></li>
+        <li><a href="http://humanfoodproject.com/americangut/" target="_blank"><img class="icon" src="/qiime/img/purchase_icon.png">Join the project!</a></li>
+        <li><a href="http://americangut.org" target="_blank"><img class="icon" src="/qiime/img/what_icon.png">What is American Gut</a></li>
+        <div class="menu_separator"></div>
+        <li><a href="logout.psp"><img class="icon" src="/qiime/img/logout_icon.png">Log out</a></li>
+    </ul>
 </div>

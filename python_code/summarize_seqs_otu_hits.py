@@ -5,19 +5,7 @@ from subprocess import Popen, PIPE, STDOUT
 from enums import ServerConfig
 from data_access_connections import data_access_factory
 from enums import ServerConfig
-
-def get_processed_data_dirs(study_dir):
-    """ Returns a list of processed_data_ directories for a study_dir
-    """
-    processed_data_dirs = []
-    prefix = 'processed_data_'
-    
-    for name in listdir(study_dir):
-        #print name
-        if name.startswith(prefix):
-            processed_data_dirs.append(name)
-
-    return processed_data_dirs
+from utils.psp_utils import tab_delim_lines_to_table
 
 def parse_log_file(log_path, start_lines):
     """ Parses one of several log files produced in the qiime pipeline. Returns 
@@ -105,44 +93,54 @@ def summarize_otus(processed_dir):
     header_lines, otu_summary_dict = parse_log_file(per_library_stats_file, start_lines)
     return header_lines, otu_summary_dict
 
-def summarize_all_stats(study_id):
+def summarize_all_stats(processed_dir):
     """
     """
-
-    # Get the processed data directories
-    user_dir = ServerConfig().home
-    study_dir = join(user_dir, 'user_data/studies', 'study_{0}'.format(study_id))
-    processed_data_dirs = get_processed_data_dirs(study_dir)
     processed_results = {}
 
-    #print str(processed_data_dirs)
+    try:
+        seq_header_lines, seq_summary_dict = summarize_seqs(processed_dir)
+        otu_header_lines, otu_summary_dict = summarize_otus(processed_dir)
 
-    # For each processed data folder, get the seq and otu sumamries
-    for processed_dir in processed_data_dirs:
-        try:
-            seq_header_lines, seq_summary_dict = summarize_seqs(join(study_dir, processed_dir))
-            otu_header_lines, otu_summary_dict = summarize_otus(join(study_dir, processed_dir))
+        # Create the tuples
+        mapping = []
+        for sample_name in seq_summary_dict:
+            sequence_count = seq_summary_dict[sample_name]
+            otu_count = None
+            percent_assignment = None
 
-            # Create the tuples
-            mapping = []
-            for sample_name in seq_summary_dict:
-                sequence_count = seq_summary_dict[sample_name]
-                otu_count = None
-                percent_assignment = None
+            if sample_name in otu_summary_dict:
+                otu_count = otu_summary_dict[sample_name]
+                percent_assignment = (float(otu_count) / float(sequence_count)) * 100.0
 
-                if sample_name in otu_summary_dict:
-                    otu_count = otu_summary_dict[sample_name]
-                    percent_assignment = (float(otu_count) / float(sequence_count)) * 100.0
+            mapping.append((sample_name, sequence_count, otu_count, percent_assignment))
 
-                mapping.append((sample_name, sequence_count, otu_count, percent_assignment))
-
-            processed_results[processed_dir] = (mapping, seq_header_lines, otu_header_lines)
-        except Exception, e:
-            print str(e)
+        processed_results[processed_dir] = (mapping, seq_header_lines, otu_header_lines)
+    except Exception, e:
+        print str(e)
 
 
     # Return all of the results
     return processed_results
+
+def histograms_as_html_table(processed_dir):
+    """Generates an HTML table from the histograms.txt file
+
+    Every "processed_data_*" directory witll contain a split_libraries
+    directory, and in that directory is a text file, histograms.txt, that
+    has read-length summaries from the split_libraries process. This
+    function will grab that file (assuming the consistent location) and
+    return an HTML-format table to display the information.
+
+    input:
+        processed_dir: The path to the processed directory
+
+    output:
+        HTML-format table containing the information in the histograms.txt
+        file
+    """
+    histograms_fp = join(processed_dir, 'split_libraries', 'histograms.txt')
+    return tab_delim_lines_to_table(open(histograms_fp, 'U').readlines())
 
 def submit_mapping_to_database(processed_results, debug=True):
     data_access = data_access_factory(ServerConfig.data_access_type)

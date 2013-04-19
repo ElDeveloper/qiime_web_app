@@ -23,15 +23,15 @@ for f in form:
                         <tr>
                         <td>Do you use any artificial tanning methods?</td>
                         <td>
-                                <input type="checkbox" id="tanning_beds" name="tanning_beds" value="bed"/><label for="tanning_yesbeds">Beds</label>
-                                <input type="checkbox" id="tanning_sprays" name="tanning_sprays" value="spray"/><label for="tanning_yessprays">Sprays</label>
+                                <input tabindex="1" type="checkbox" id="tanning_beds" name="tanning_beds" value="bed"/><label for="tanning_yesbeds">Beds</label>
+                                <input tabindex="2" type="checkbox" id="tanning_sprays" name="tanning_sprays" value="spray"/><label for="tanning_yessprays">Sprays</label>
                         </td>
                         </tr>
                         <tr>
                             <td>How often do you exercise?</td>
                             <td>
-                                <select name="exercise_frequency" id="exercise_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="3" name="exercise_frequency" id="exercise_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -43,8 +43,8 @@ for f in form:
                         <tr>
                             <td>Do you generally exercise indoors or outdoors?</td>
                             <td>
-                                <select name="exercise_location" id="exercise_location">
-                                    <option>Select an option</option>
+                                <select tabindex="4" name="exercise_location" id="exercise_location">
+                                    <option value="">Select an option</option>
                                     <option>Indoors</option>
                                     <option>Outdoors</option>
                                     <option>Both</option>
@@ -57,16 +57,16 @@ for f in form:
                             <td>Do you bite your fingernails?</td>
                             <td>
                                 <div id="nails">
-                                    <input type="radio" id="nails_yes" name="nails" value="yes"/><label for="nails_yes">Yes</label>
-                                    <input type="radio" id="nails_no" name="nails" value="no"/><label for="nails_no">No</label>
+                                    <input tabindex="5" type="radio" id="nails_yes" name="nails" value="yes"/><label for="nails_yes">Yes</label>
+                                    <input tabindex="6" type="radio" id="nails_no" name="nails" value="no"/><label for="nails_no">No</label>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>How often do you use a swimming pool/hot tub?</td>
                             <td>
-                                <select name="pool_frequency" id="pool_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="7" name="pool_frequency" id="pool_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -78,8 +78,8 @@ for f in form:
                         <tr>
                             <td>How often do you smoke cigarettes?</td>
                             <td>
-                                <select name="smoking_frequency" id="smoking_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="8" name="smoking_frequency" id="smoking_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -91,8 +91,8 @@ for f in form:
                         <tr>
                             <td>How often do you drink alcohol?</td>
                             <td>
-                                <select name="alcohol_frequency" id="alcohol_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="9" name="alcohol_frequency" id="alcohol_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -104,8 +104,8 @@ for f in form:
                         <tr>
                             <td>How often do you brush your teeth?</td>
                             <td>
-                                <select name="teethbrushing_frequency" id="teethbrushing_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="10" name="teethbrushing_frequency" id="teethbrushing_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -117,8 +117,8 @@ for f in form:
                         <tr>
                             <td>How often do you floss your teeth?</td>
                             <td>
-                                <select name="flossing_frequency" id="flossing_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="11" name="flossing_frequency" id="flossing_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -130,8 +130,8 @@ for f in form:
                         <tr>
                             <td>How often do you wear facial cosmetics?</td>
                             <td>
-                                <select name="cosmetics_frequency" id="cosmetics_frequency">
-                                    <option>Select an option</option>
+                                <select tabindex="12" name="cosmetics_frequency" id="cosmetics_frequency">
+                                    <option value="">Select an option</option>
                                     <option>Daily</option>
                                     <option>Regularly (3-5 times/week)</option>
                                     <option>Occasionally (1-2 times/week)</option>
@@ -143,8 +143,8 @@ for f in form:
                         <tr>
                             <td>Do you use deodorant or antiperspirant (antiperspirants generally contain aluminum)?</td>
                             <td>
-                                <select name="deoderant_use" id="deoderant_use">
-                                    <option>Select an option</option>
+                                <select tabindex="13" name="deoderant_use" id="deoderant_use">
+                                    <option value="">Select an option</option>
                                     <option>I use deoderant</option>
                                     <option>I use an antiperspirant</option>
                                     <option>Not sure, but I use some form of deoderant/antiperspirant</option>
@@ -155,8 +155,8 @@ for f in form:
                         <tr>
                             <td>Approximately how many hours of sleep to you get in an average night?</td>
                             <td>
-                                <select name="sleep_duration" id="sleep_duration">
-                                    <option>Select an option</option>
+                                <select tabindex="14" name="sleep_duration" id="sleep_duration">
+                                    <option value="">Select an option</option>
                                     <option>Less than 5 hours</option>
                                     <option>5-6 hours</option>
                                     <option>6-7 hours</option>
@@ -169,8 +169,8 @@ for f in form:
                             <td>Do you use fabric softener when drying your clothes?</td>
                             <td>
                                 <div id="softener">
-                                    <input type="radio" id="softener_yes" name="softener" value="yes"/><label for="softener_yes">Yes</label>
-                                    <input type="radio" id="softener_no" name="softener" value="no"/><label for="softener_no">No</label>
+                                    <input tabindex="15" type="radio" id="softener_yes" name="softener" value="yes"/><label for="softener_yes">Yes</label>
+                                    <input tabindex="16" type="radio" id="softener_no" name="softener" value="no"/><label for="softener_no">No</label>
                                 </div>
                             </td>
                         </tr>
@@ -182,7 +182,8 @@ for f in form:
         </table>
     </div>
     <br />
-    <input type="submit" value="Continue">
+    <input type="button" value="Reset" onclick="reset('survey_4')">
+    <input tabindex="17" type="submit" id="submit4" name="submit4" value="Continue">
     <input type="hidden" id="page" name="page" value="survey5.psp">
     </form>
     <br />
@@ -195,6 +196,15 @@ for f in form:
         $( "#progressbar" ).progressbar({
           value: 40
         });
+//        var button_clicked = false;
+//        $("#submit4").click(function() {
+//            button_clicked = true;
+//        });
+//        
+//        $(window).bind('beforeunload', function(){
+//            if(!button_clicked)
+//                return "If you navigate away from this page now, you will lose your progress on the survey, and the participant will not be added."
+//        });
       });
     </script>
     <br />
