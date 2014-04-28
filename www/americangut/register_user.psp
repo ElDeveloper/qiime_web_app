@@ -331,24 +331,8 @@ req.write('window.onload=initialize;</script>')
     <br />
     </div>
 
-    <!-- Map key -->
-    <div style="position:absolute; bottom: 30px; left:50px; opacity:0.9; width:260px;">
-        <div class="left menuheader" style="margin-top:10px;">
-            <p>Map Key</p>
-        </div>
 
-        <div class="left keywrapper">
-            <ul class="key">
-                <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|00B2FF"/> Participant</li>
-                <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|ffff00"/> Kit Verified</li>
-                <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|00ff00"/> Sample(s) Logged</li>
-            </ul>
-        </div>
-    </div>
-
-
-
-    <div class="registerwrapper" style="position:absolute; top:16px; left:285px; padding:15px;">
+    <div class="registerwrapper centered-content" >
 
 		<form action="register_user_submit.psp" method="post" name="register_user_submit" id="register_user_submit">
 		</form>
@@ -363,7 +347,7 @@ if 'email' in form:
 else:
 	# Draw the form
 %>
-        <div class="wrapper clearfix" style="position:absolute; top:120px; left:50px; opacity:0.9; width:260px;">
+        <div style="width:400px; margin:0 auto;">
 		<form name="newParticipant" id="newParticipant" method="post" action="add_participant.psp">
 			<input type="hidden" name="kit_id" id="kit_id" value="<%=kit_id%>">
 			<input type="hidden" name="password" id="password" value="<%=password%>">
