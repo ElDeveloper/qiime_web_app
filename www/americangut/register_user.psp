@@ -363,7 +363,7 @@ if 'email' in form:
 else:
 	# Draw the form
 %>
-
+        <div class="wrapper clearfix" style="position:absolute; top:120px; left:50px; opacity:0.9; width:260px;">
 		<form name="newParticipant" id="newParticipant" method="post" action="add_participant.psp">
 			<input type="hidden" name="kit_id" id="kit_id" value="<%=kit_id%>">
 			<input type="hidden" name="password" id="password" value="<%=password%>">
@@ -379,7 +379,7 @@ else:
 				<tr><td></td><td><input type="button" onclick="validateNewParticipant()" value="Submit My Information"/></td></tr>
 			</table>
 		</form>
-
+        </div>
 <%
 # End indent
 %>
