@@ -340,18 +340,21 @@ req.write('window.onload=initialize;</script>')
     &nbsp;
     <br />
     </div>
-    <div class="left menuheader">
-    <p>Map Key</p>
-    </div>
-    <div class="left keywrapper" style="width:100%;">
-    <ul class="key">
-        <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|00B2FF"/> Participant</li>
-        <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|ffff00"/> Kit Verified</li>
-        <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|00ff00"/> Sample(s) Logged</li>
-    </ul>
-    </div>
 
+    <!-- Map key -->
+    <div style="position:absolute; bottom: 30px; left:50px; opacity:0.9; width:260px;">
+        <div class="left menuheader" style="margin-top:10px;">
+            <p>Map Key</p>
+        </div>
 
+        <div class="left keywrapper">
+            <ul class="key">
+                <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|00B2FF"/> Participant</li>
+                <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|ffff00"/> Kit Verified</li>
+                <li><img src="http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=wc-male|00ff00"/> Sample(s) Logged</li>
+            </ul>
+        </div>
+    </div>
 
 
 
